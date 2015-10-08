@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
   //console.log('jsa');
-  res.sendFile('/Users/Josafat/Desktop/learn/chat-example/index.html');
+  res.sendFile('/Users/Josafat/Desktop/learn/socket-io-chat/index.html');
 });
 
 io.on('connection', function(socket){
