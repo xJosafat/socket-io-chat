@@ -1,14 +1,13 @@
 var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 app.get('/', function(req, res){
-	//console.log('jsa');
 	res.sendFile('/Users/Josafat/Desktop/learn/socket-io-chat/index.html');
 });
 
 io.on('connection', function(socket){
-	io.emit('chat message', "a user connected");
+	socket.broadcast.emit('chat message', "a user connected");
 	socket.on('disconnect', function(){
 		io.emit('chat message', "user disconnected");
 	});
@@ -17,6 +16,6 @@ io.on('connection', function(socket){
 	});
 });
 
-http.listen(3000, function(){
+server.listen(3000, function(){
 	console.log('listening on *:3000');
 });
